@@ -157,24 +157,25 @@ elif app_mode == "🧮 Price Calculator":
     st.write("Select a car and check whether its asking price is reasonable")
 
     # ---- Car Name Selection ----
-    car_name = st.selectbox("Select Car Name", sorted(car_names))
+    car_name = st.selectbox("Select Car Name", sorted(df_raw["Car_Name"].unique()))
     car_df = df_raw[df_raw["Car_Name"] == car_name]
 
-    # Use historical averages safely
+    # Historical averages
     avg_year = int(car_df["Year"].mean())
 
-    # Safe selection of kilometers column
-    kms_candidates = ["Kms_Driven", "Kms Driven", "Kilometers"]
+    # Detect kilometers column dynamically
     kms_col = None
-    for col in kms_candidates:
-        if col in car_df.columns:
+    for col in df_raw.columns:
+        if "kms" in col.lower() or "kilometer" in col.lower():
             kms_col = col
             break
-    if kms_col is None:
-        st.error("Could not find a 'Kilometers Driven' column in the dataset.")
-        kms_col = "Kms_Driven"
 
-    avg_kms = int(car_df[kms_col].mean())
+    if kms_col is None:
+        st.warning("No kilometers column found. Using default value of 30000 km.")
+        avg_kms = 30000
+    else:
+        avg_kms = int(car_df[kms_col].mean())
+
     avg_owner = int(car_df["Owner"].mode()[0])
     avg_price = float(car_df["Selling_Price"].mean())
 
@@ -215,3 +216,4 @@ elif app_mode == "🧮 Price Calculator":
         ax.set_ylabel("Price (Lakhs)")
         ax.set_title(f"Price Comparison for {car_name}")
         st.pyplot(fig)
+
