@@ -163,7 +163,7 @@ elif app_mode == "🧮 Price Calculator":
 
     # Use historical averages safely
     avg_year = int(car_df["Year"].mean())
-    kms_col = [c for c in car_df.columns if "Kms" in c][0]  # dynamic column selection
+    kms_col = [c for c in car_df.columns if "Kms" in c][0]  
     avg_kms = int(car_df[kms_col].mean())
     avg_owner = int(car_df["Owner"].mode()[0])
     avg_price = float(car_df["Selling_Price"].mean())
