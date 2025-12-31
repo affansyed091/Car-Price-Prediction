@@ -1,53 +1,41 @@
-#!/usr/bin/env python
-# coding: utf-8
-
-# In[1]:
-
-
 import pandas as pd
 import numpy as np
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import OneHotEncoder,StandardScaler
 
 
-# In[2]:
-
-
 df = pd.read_csv("CAR DATA1.csv")
 df
 
 
-# In[3]:
 
 
 df.isnull().sum()
 
 
-# In[4]:
+
 
 
 df.duplicated()
 
 
-# In[5]:
+
 
 
 df["Car_Age"] = 2025 - df["Year"] 
 
 
-# In[6]:
 
 
 df.drop(["Year", "Car_Name"], axis=1, inplace=True) 
 
 
-# In[7]:
+
 
 
 df
 
 
-# In[8]:
 
 
 df = pd.get_dummies(
@@ -57,20 +45,19 @@ df = pd.get_dummies(
 )
 
 
-# In[9]:
+
 
 
 df
 
 
-# In[10]:
 
 
 X = df.drop('Selling_Price', axis=1)
 y = df['Selling_Price']
 
 
-# In[11]:
+
 
 
 X_train, X_test, y_train, y_test = train_test_split(
@@ -78,35 +65,34 @@ X_train, X_test, y_train, y_test = train_test_split(
 )
 
 
-# In[12]:
+
 
 
 from sklearn.linear_model import LinearRegression
 from sklearn.ensemble import RandomForestRegressor
 
 
-# In[13]:
+
 
 
 lr = LinearRegression()
 rf = RandomForestRegressor()
 
 
-# In[14]:
 
 
 lr.fit(X_train, y_train)
 rf.fit(X_train, y_train)
 
 
-# In[15]:
+
 
 
 y_lr = lr.predict(X_test)
 y_rf = rf.predict(X_test)
 
 
-# In[16]:
+
 
 
 
@@ -120,7 +106,7 @@ print(f"Root Mean Squared Error (RMSE): {(mean_squared_error(y_test, y_lr))**0.5
 print(f"R2 Score: {r2_score(y_test, y_lr):.3f}")
 
 
-# In[17]:
+
 
 
 print("\n------ RANDOM FOREST REGRESSOR ------")
@@ -130,7 +116,6 @@ print(f"Root Mean Squared Error (RMSE): {(mean_squared_error(y_test, y_rf))**0.5
 print(f"R2 Score: {r2_score(y_test, y_rf):.3f}")
 
 
-# In[18]:
 
 
 
@@ -140,7 +125,7 @@ df['Predicted_Price_LR'] = lr.predict(X)
 df['Good_Deal_LR'] = (df['Selling_Price'] < df['Predicted_Price_LR']).astype(int)
 
 
-# In[19]:
+
 
 
 
@@ -150,7 +135,7 @@ df['Predicted_Price_RF'] = rf.predict(X)
 df['Good_Deal_RF'] = (df['Selling_Price'] < df['Predicted_Price_RF']).astype(int)
 
 
-# In[20]:
+
 
 
 print("Good deals (Linear Regression):", df['Good_Deal_LR'].sum())
