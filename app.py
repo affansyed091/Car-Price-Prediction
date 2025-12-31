@@ -100,8 +100,6 @@ if app_mode == "📊 Data Overview":
     fig = px.histogram(df_raw, x="Selling_Price", nbins=30)
     st.plotly_chart(fig, use_container_width=True)
 
-
-
 # ================== MODEL EVALUATION & COMPARISON ==================
 elif app_mode == "🤖 Model Evaluation & Comparison":
     st.title("🤖 Model Evaluation & Comparison")
@@ -110,18 +108,18 @@ elif app_mode == "🤖 Model Evaluation & Comparison":
 
     with col1:
         st.subheader("Linear Regression")
-        st.metric("MAE", f"{mean_absolute_error(y_test, y_lr):.2f}")
-        st.metric("RMSE", f"{mean_squared_error(y_test, y_lr, squared=False):.2f}")
-        st.metric("R²", f"{r2_score(y_test, y_lr):.2f}")
+        st.metric("MAE", round(mean_absolute_error(y_test, y_lr), 3))
+        st.metric("RMSE", round(compute_rmse(y_test, y_lr), 3))
+        st.metric("R²", round(r2_score(y_test, y_lr), 3))
         st.subheader("Actual vs Predicted (LR)")
         fig = px.scatter(x=y_test, y=y_lr, labels={"x": "Actual", "y": "Predicted"})
         st.plotly_chart(fig, use_container_width=True)
 
     with col2:
         st.subheader("Random Forest")
-        st.metric("MAE", f"{mean_absolute_error(y_test, y_rf):.2f}")
-        st.metric("RMSE", f"{mean_squared_error(y_test, y_rf, squared=False):.2f}")
-        st.metric("R²", f"{r2_score(y_test, y_rf):.2f}")
+        st.metric("MAE", round(mean_absolute_error(y_test, y_rf), 3))
+        st.metric("RMSE", round(compute_rmse(y_test, y_rf), 3))
+        st.metric("R²", round(r2_score(y_test, y_rf), 3))
         st.subheader("Actual vs Predicted (RF)")
         fig = px.scatter(x=y_test, y=y_rf, labels={"x": "Actual", "y": "Predicted"})
         st.plotly_chart(fig, use_container_width=True)
@@ -130,14 +128,14 @@ elif app_mode == "🤖 Model Evaluation & Comparison":
     metrics = pd.DataFrame({
         "Metric": ["MAE", "RMSE", "R²"],
         "Linear Regression": [
-            round(mean_absolute_error(y_test, y_lr), 2),
-            round(mean_squared_error(y_test, y_lr, squared=False), 2),
-            round(r2_score(y_test, y_lr), 2)
+            mean_absolute_error(y_test, y_lr),
+            compute_rmse(y_test, y_lr),
+            r2_score(y_test, y_lr)
         ],
         "Random Forest": [
-            round(mean_absolute_error(y_test, y_rf), 2),
-            round(mean_squared_error(y_test, y_rf, squared=False), 2),
-            round(r2_score(y_test, y_rf), 2)
+            mean_absolute_error(y_test, y_rf),
+            compute_rmse(y_test, y_rf),
+            r2_score(y_test, y_rf)
         ]
     })
     st.dataframe(metrics)
