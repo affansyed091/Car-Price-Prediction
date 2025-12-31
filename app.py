@@ -95,13 +95,17 @@ if app_mode == "📊 Data Overview":
 
     st.subheader("Correlation Heatmap (Key Features vs Selling_Price)")
 
-    # Select only relevant columns
-    corr_columns = ["Selling_Price", "Present_Price", "Car_Age", "Fuel_Type", "Transmission"]
-    
-    # Convert categorical features to numeric for correlation
-    corr_df = df_raw[corr_columns].copy()
-    corr_df = pd.get_dummies(corr_df, columns=["Fuel_Type", "Transmission"], drop_first=True)
+    # Select relevant columns safely
+    key_columns = ["Selling_Price", "Present_Price", "Car_Age"]
+    cat_columns = ["Fuel_Type", "Transmission"]
 
+    # Make a copy
+    corr_df = df_raw[key_columns + cat_columns].copy()
+
+    # Convert categorical features to numeric
+    corr_df = pd.get_dummies(corr_df, columns=cat_columns, drop_first=True)
+
+    # Plot heatmap
     fig, ax = plt.subplots(figsize=(10, 6))
     sns.heatmap(corr_df.corr(), cmap="coolwarm", annot=True)
     st.pyplot(fig)
