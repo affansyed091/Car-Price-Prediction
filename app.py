@@ -51,7 +51,7 @@ df = pd.get_dummies(
 X = df.drop("Selling_Price", axis=1)
 y = df["Selling_Price"]
 
-# ---------------- Train Models (cached) ----------------
+# ---------------- Train Models ----------------
 @st.cache_resource
 def train_models(X, y):
     X_train, X_test, y_train, y_test = train_test_split(
@@ -59,7 +59,10 @@ def train_models(X, y):
     )
 
     lr = LinearRegression()
-    rf = RandomForestRegressor(random_state=42)
+    rf = RandomForestRegressor(
+        n_estimators=200,
+        random_state=42
+    )
 
     lr.fit(X_train, y_train)
     rf.fit(X_train, y_train)
@@ -88,7 +91,7 @@ if app_mode == "📊 Data Overview":
 
     st.subheader("Correlation Heatmap")
     fig, ax = plt.subplots(figsize=(10, 6))
-    sns.heatmap(df.select_dtypes(include=np.number).corr(), cmap="coolwarm")
+    sns.heatmap(df.corr(), cmap="coolwarm")
     st.pyplot(fig)
 
     st.subheader("Selling Price Distribution")
@@ -141,8 +144,7 @@ elif app_mode == "📈 Model Comparison":
         metrics,
         x="Metric",
         y=["Linear Regression", "Random Forest"],
-        barmode="group",
-        title="Model Performance Comparison"
+        barmode="group"
     )
     st.plotly_chart(fig, use_container_width=True)
 
@@ -156,8 +158,7 @@ elif app_mode == "🔮 Good Deal Analysis":
 
     fig = px.pie(
         names=["Good Deal", "Not Good Deal"],
-        values=[df["Good_Deal_RF"].sum(), len(df) - df["Good_Deal_RF"].sum()],
-        title="Random Forest Good Deal Ratio"
+        values=[df["Good_Deal_RF"].sum(), len(df) - df["Good_Deal_RF"].sum()]
     )
     st.plotly_chart(fig)
 
@@ -165,13 +166,20 @@ elif app_mode == "🔮 Good Deal Analysis":
 elif app_mode == "🧮 Price Calculator":
     st.title("🧮 Car Price Calculator")
 
-    present_price = st.number_input("Current Market Price (Lakhs)", 0.0, 50.0, 5.0)
-    kms = st.number_input("Kilometers Driven", 0, 500000, 30000)
-    owner = st.selectbox("Owner Type", [0, 1, 3])
-    fuel = st.selectbox("Fuel Type", ["Petrol", "Diesel"])
-    seller = st.selectbox("Seller Type", ["Dealer", "Individual"])
-    transmission = st.selectbox("Transmission", ["Manual", "Automatic"])
-    car_age = st.slider("Car Age (Years)", 0, 25, 5)
+    st.write("Enter car details to predict its selling price")
+
+    col1, col2 = st.columns(2)
+
+    with col1:
+        present_price = st.number_input("Current Market Price (Lakhs)", 0.0, 50.0, 5.0)
+        kms = st.number_input("Kilometers Driven", 0, 500000, 30000)
+        owner = st.selectbox("Owner Type", [0, 1, 3])
+        car_age = st.slider("Car Age (Years)", 0, 25, 5)
+
+    with col2:
+        fuel = st.selectbox("Fuel Type", ["Petrol", "Diesel"])
+        seller = st.selectbox("Seller Type", ["Dealer", "Individual"])
+        transmission = st.selectbox("Transmission", ["Manual", "Automatic"])
 
     if st.button("🚀 Predict Price"):
         input_data = pd.DataFrame([{
@@ -188,16 +196,16 @@ elif app_mode == "🧮 Price Calculator":
 
         predicted_price = rf.predict(input_data)[0]
 
-        st.success(f"💰 Predicted Price: {predicted_price:.2f} Lakhs")
+        st.success(f"💰 Predicted Selling Price: {predicted_price:.2f} Lakhs")
 
-        if present_price < predicted_price:
-            st.success("🟢 Reasonable / Good Deal")
+        if present_price <= predicted_price:
+            st.success("🟢 This car is Reasonably Priced / Good Deal")
         else:
-            st.error("🔴 Overpriced")
+            st.error("🔴 This car is Overpriced")
 
         fig, ax = plt.subplots()
         ax.bar(
-            ["Entered Price", "Predicted Price", "Average Market"],
+            ["Entered Price", "Predicted Price", "Market Average"],
             [present_price, predicted_price, df["Selling_Price"].mean()]
         )
         ax.set_ylabel("Price (Lakhs)")
