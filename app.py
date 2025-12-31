@@ -152,7 +152,6 @@ elif app_mode == "🔮 Good Deal Analysis":
     )
     st.plotly_chart(fig)
 
-# ================== PRICE CALCULATOR ==================
 elif app_mode == "🧮 Price Calculator":
     st.title("🧮 Car Price Calculator")
     st.write("Select a car and check whether its asking price is reasonable")
@@ -163,7 +162,18 @@ elif app_mode == "🧮 Price Calculator":
 
     # Use historical averages safely
     avg_year = int(car_df["Year"].mean())
-    kms_col = [c for c in car_df.columns if "Kms" in c][0]  
+
+    # Safe selection of kilometers column
+    kms_candidates = ["Kms_Driven", "Kms Driven", "Kilometers"]
+    kms_col = None
+    for col in kms_candidates:
+        if col in car_df.columns:
+            kms_col = col
+            break
+    if kms_col is None:
+        st.error("Could not find a 'Kilometers Driven' column in the dataset.")
+        kms_col = "Kms_Driven"
+
     avg_kms = int(car_df[kms_col].mean())
     avg_owner = int(car_df["Owner"].mode()[0])
     avg_price = float(car_df["Selling_Price"].mean())
