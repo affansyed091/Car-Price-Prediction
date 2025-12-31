@@ -4,19 +4,20 @@ import numpy as np
 import matplotlib.pyplot as plt
 import seaborn as sns
 import plotly.express as px
+
 from sklearn.model_selection import train_test_split
 from sklearn.linear_model import LinearRegression
 from sklearn.ensemble import RandomForestRegressor
 from sklearn.metrics import r2_score, mean_absolute_error, mean_squared_error
 
-
+# ---------------- Page Config ----------------
 st.set_page_config(
     page_title="Car Price Prediction App",
     page_icon="🚗",
     layout="wide"
 )
 
-
+# ---------------- Sidebar ----------------
 st.sidebar.title("🚗 Navigation")
 app_mode = st.sidebar.selectbox(
     "Choose a page:",
@@ -29,48 +30,53 @@ app_mode = st.sidebar.selectbox(
     ]
 )
 
-
+# ---------------- Load Data ----------------
 @st.cache_data
 def load_data():
     return pd.read_csv("CAR DATA1.csv")
 
 df_raw = load_data()
 
-
+# ---------------- Preprocessing ----------------
 df = df_raw.copy()
 df["Car_Age"] = 2025 - df["Year"]
 df.drop(["Year", "Car_Name"], axis=1, inplace=True)
 
 df = pd.get_dummies(
     df,
-    columns=['Fuel_Type', 'Selling_type', 'Transmission'],
+    columns=["Fuel_Type", "Selling_type", "Transmission"],
     drop_first=True
 )
 
 X = df.drop("Selling_Price", axis=1)
 y = df["Selling_Price"]
 
-X_train, X_test, y_train, y_test = train_test_split(
-    X, y, test_size=0.2, random_state=42
-)
+# ---------------- Train Models (cached) ----------------
+@st.cache_resource
+def train_models(X, y):
+    X_train, X_test, y_train, y_test = train_test_split(
+        X, y, test_size=0.2, random_state=42
+    )
 
+    lr = LinearRegression()
+    rf = RandomForestRegressor(random_state=42)
 
-lr = LinearRegression()
-rf = RandomForestRegressor(random_state=42)
+    lr.fit(X_train, y_train)
+    rf.fit(X_train, y_train)
 
-lr.fit(X_train, y_train)
-rf.fit(X_train, y_train)
+    return lr, rf, X_train, X_test, y_train, y_test
+
+lr, rf, X_train, X_test, y_train, y_test = train_models(X, y)
 
 y_lr = lr.predict(X_test)
 y_rf = rf.predict(X_test)
-
 
 df["Predicted_LR"] = lr.predict(X)
 df["Predicted_RF"] = rf.predict(X)
 df["Good_Deal_LR"] = (df["Selling_Price"] < df["Predicted_LR"]).astype(int)
 df["Good_Deal_RF"] = (df["Selling_Price"] < df["Predicted_RF"]).astype(int)
 
-
+# ================== DATA OVERVIEW ==================
 if app_mode == "📊 Data Overview":
     st.title("📊 Data Overview")
 
@@ -82,14 +88,14 @@ if app_mode == "📊 Data Overview":
 
     st.subheader("Correlation Heatmap")
     fig, ax = plt.subplots(figsize=(10, 6))
-    sns.heatmap(df.corr(), cmap="coolwarm")
+    sns.heatmap(df.select_dtypes(include=np.number).corr(), cmap="coolwarm")
     st.pyplot(fig)
 
     st.subheader("Selling Price Distribution")
     fig = px.histogram(df_raw, x="Selling_Price", nbins=30)
     st.plotly_chart(fig, use_container_width=True)
 
-
+# ================== MODEL EVALUATION ==================
 elif app_mode == "🤖 Model Evaluation":
     st.title("🤖 Model Evaluation")
 
@@ -107,11 +113,11 @@ elif app_mode == "🤖 Model Evaluation":
         st.metric("RMSE", round(mean_squared_error(y_test, y_rf)**0.5, 3))
         st.metric("R²", round(r2_score(y_test, y_rf), 3))
 
-    st.subheader("Actual vs Predicted")
-    fig = px.scatter(x=y_test, y=y_rf, labels={"x":"Actual","y":"Predicted"})
+    st.subheader("Actual vs Predicted (Random Forest)")
+    fig = px.scatter(x=y_test, y=y_rf, labels={"x": "Actual", "y": "Predicted"})
     st.plotly_chart(fig, use_container_width=True)
 
-
+# ================== MODEL COMPARISON ==================
 elif app_mode == "📈 Model Comparison":
     st.title("📈 Model Comparison")
 
@@ -140,27 +146,24 @@ elif app_mode == "📈 Model Comparison":
     )
     st.plotly_chart(fig, use_container_width=True)
 
-
+# ================== GOOD DEAL ANALYSIS ==================
 elif app_mode == "🔮 Good Deal Analysis":
     st.title("🔮 Good Deal Analysis")
 
     col1, col2 = st.columns(2)
-
     col1.metric("Good Deals (LR)", df["Good_Deal_LR"].sum())
     col2.metric("Good Deals (RF)", df["Good_Deal_RF"].sum())
 
     fig = px.pie(
         names=["Good Deal", "Not Good Deal"],
-        values=[df["Good_Deal_RF"].sum(), len(df)-df["Good_Deal_RF"].sum()],
+        values=[df["Good_Deal_RF"].sum(), len(df) - df["Good_Deal_RF"].sum()],
         title="Random Forest Good Deal Ratio"
     )
     st.plotly_chart(fig)
 
-
+# ================== PRICE CALCULATOR ==================
 elif app_mode == "🧮 Price Calculator":
     st.title("🧮 Car Price Calculator")
-
-    st.markdown("Enter car details to predict price & check if it's reasonable")
 
     present_price = st.number_input("Current Market Price (Lakhs)", 0.0, 50.0, 5.0)
     kms = st.number_input("Kilometers Driven", 0, 500000, 30000)
@@ -187,14 +190,11 @@ elif app_mode == "🧮 Price Calculator":
 
         st.success(f"💰 Predicted Price: {predicted_price:.2f} Lakhs")
 
-        diff = present_price - predicted_price
-
-        if diff < 0:
+        if present_price < predicted_price:
             st.success("🟢 Reasonable / Good Deal")
         else:
             st.error("🔴 Overpriced")
 
-        # Visualization
         fig, ax = plt.subplots()
         ax.bar(
             ["Entered Price", "Predicted Price", "Average Market"],
