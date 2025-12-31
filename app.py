@@ -23,6 +23,7 @@ app_mode = st.sidebar.selectbox(
     "Choose a page:",
     [
         "📊 Data Overview",
+        "📈 Correlation Heatmap",
         "🤖 Model Evaluation & Comparison",
         "🔮 Good Deal Analysis",
         "🧮 Price Calculator"
@@ -43,15 +44,15 @@ df_raw = load_data()
 df = df_raw.copy()
 df["Car_Age"] = 2025 - df["Year"]
 car_names = df_raw["Car_Name"].unique()
-df.drop(["Year", "Car_Name"], axis=1, inplace=True)
-df = pd.get_dummies(
-    df,
+df_model = df.drop(["Year", "Car_Name"], axis=1)
+df_model = pd.get_dummies(
+    df_model,
     columns=["Fuel_Type", "Selling_type", "Transmission"],
     drop_first=True
 )
 
-X = df.drop("Selling_Price", axis=1)
-y = df["Selling_Price"]
+X = df_model.drop("Selling_Price", axis=1)
+y = df_model["Selling_Price"]
 
 # ---------------- Train Models ----------------
 @st.cache_resource
@@ -59,7 +60,6 @@ def train_models(X, y):
     X_train, X_test, y_train, y_test = train_test_split(
         X, y, test_size=0.2, random_state=42
     )
-
     lr = LinearRegression()
     rf = RandomForestRegressor(n_estimators=200, random_state=42)
 
@@ -73,32 +73,50 @@ lr, rf, X_train, X_test, y_train, y_test = train_models(X, y)
 y_lr = lr.predict(X_test)
 y_rf = rf.predict(X_test)
 
+# Add predictions to main df for analysis
 df["Predicted_LR"] = lr.predict(X)
 df["Predicted_RF"] = rf.predict(X)
 df["Good_Deal_LR"] = (df["Selling_Price"] < df["Predicted_LR"]).astype(int)
 df["Good_Deal_RF"] = (df["Selling_Price"] < df["Predicted_RF"]).astype(int)
 
-# Function to safely compute RMSE
+# Function to compute RMSE
 def compute_rmse(y_true, y_pred):
     return mean_squared_error(y_true, y_pred) ** 0.5
 
 # ================== DATA OVERVIEW ==================
 if app_mode == "📊 Data Overview":
     st.title("📊 Data Overview")
-    st.subheader("Dataset Preview")
-    st.dataframe(df_raw.head())
+    st.write(f"Dataset contains **{df_raw.shape[0]} rows** and **{df_raw.shape[1]} columns**")
+    st.dataframe(df_raw)  # Show full dataset
 
-    st.subheader("Statistical Summary")
-    st.dataframe(df.describe())
+    st.subheader("Basic Statistics")
+    st.dataframe(df_raw.describe().T)
 
-    st.subheader("Correlation Heatmap")
-    fig, ax = plt.subplots(figsize=(10, 6))
-    sns.heatmap(df.corr(), cmap="coolwarm", annot=True)
+    st.subheader("Additional Insights")
+    st.write(f"- Number of unique cars: {df_raw['Car_Name'].nunique()}")
+    st.write(f"- Average Selling Price: {df_raw['Selling_Price'].mean():.2f} Lakhs")
+    st.write(f"- Number of unique fuel types: {df_raw['Fuel_Type'].nunique()}")
+    st.write(f"- Number of owners: {df_raw['Owner'].nunique()}")
+
+
+# ================== CORRELATION HEATMAP ==================
+elif app_mode == "📈 Correlation Heatmap":
+    st.title("📈 Correlation Heatmap")
+
+    # Heatmap without predicted values
+    st.subheader("Correlation of Features (Raw Data)")
+    corr_raw = df_model.drop(columns=["Predicted_LR", "Predicted_RF"], errors='ignore').corr()
+    fig, ax = plt.subplots(figsize=(12, 6))
+    sns.heatmap(corr_raw, cmap="coolwarm", annot=True)
     st.pyplot(fig)
 
-    st.subheader("Selling Price Distribution")
-    fig = px.histogram(df_raw, x="Selling_Price", nbins=30)
-    st.plotly_chart(fig, use_container_width=True)
+    # Heatmap including predicted values
+    st.subheader("Correlation Including Predicted Values")
+    corr_pred = df_model.corr()
+    fig, ax = plt.subplots(figsize=(12, 6))
+    sns.heatmap(corr_pred, cmap="coolwarm", annot=True)
+    st.pyplot(fig)
+
 
 # ================== MODEL EVALUATION & COMPARISON ==================
 elif app_mode == "🤖 Model Evaluation & Comparison":
@@ -108,18 +126,18 @@ elif app_mode == "🤖 Model Evaluation & Comparison":
 
     with col1:
         st.subheader("Linear Regression")
-        st.metric("MAE", round(mean_absolute_error(y_test, y_lr), 3))
-        st.metric("RMSE", round(compute_rmse(y_test, y_lr), 3))
-        st.metric("R²", round(r2_score(y_test, y_lr), 3))
+        st.metric("MAE", f"{mean_absolute_error(y_test, y_lr):.2f}")
+        st.metric("RMSE", f"{compute_rmse(y_test, y_lr):.2f}")
+        st.metric("R²", f"{r2_score(y_test, y_lr):.2f}")
         st.subheader("Actual vs Predicted (LR)")
         fig = px.scatter(x=y_test, y=y_lr, labels={"x": "Actual", "y": "Predicted"})
         st.plotly_chart(fig, use_container_width=True)
 
     with col2:
         st.subheader("Random Forest")
-        st.metric("MAE", round(mean_absolute_error(y_test, y_rf), 3))
-        st.metric("RMSE", round(compute_rmse(y_test, y_rf), 3))
-        st.metric("R²", round(r2_score(y_test, y_rf), 3))
+        st.metric("MAE", f"{mean_absolute_error(y_test, y_rf):.2f}")
+        st.metric("RMSE", f"{compute_rmse(y_test, y_rf):.2f}")
+        st.metric("R²", f"{r2_score(y_test, y_rf):.2f}")
         st.subheader("Actual vs Predicted (RF)")
         fig = px.scatter(x=y_test, y=y_rf, labels={"x": "Actual", "y": "Predicted"})
         st.plotly_chart(fig, use_container_width=True)
@@ -128,14 +146,14 @@ elif app_mode == "🤖 Model Evaluation & Comparison":
     metrics = pd.DataFrame({
         "Metric": ["MAE", "RMSE", "R²"],
         "Linear Regression": [
-            mean_absolute_error(y_test, y_lr),
-            compute_rmse(y_test, y_lr),
-            r2_score(y_test, y_lr)
+            round(mean_absolute_error(y_test, y_lr), 2),
+            round(compute_rmse(y_test, y_lr), 2),
+            round(r2_score(y_test, y_lr), 2)
         ],
         "Random Forest": [
-            mean_absolute_error(y_test, y_rf),
-            compute_rmse(y_test, y_rf),
-            r2_score(y_test, y_rf)
+            round(mean_absolute_error(y_test, y_rf), 2),
+            round(compute_rmse(y_test, y_rf), 2),
+            round(r2_score(y_test, y_rf), 2)
         ]
     })
     st.dataframe(metrics)
@@ -144,6 +162,7 @@ elif app_mode == "🤖 Model Evaluation & Comparison":
     st.plotly_chart(fig, use_container_width=True)
 
     st.info("✅ This methodology using Linear Regression and Random Forest Regressor is suitable for predicting car prices accurately and identifying good deals.")
+
 
 # ================== GOOD DEAL ANALYSIS ==================
 elif app_mode == "🔮 Good Deal Analysis":
@@ -156,6 +175,7 @@ elif app_mode == "🔮 Good Deal Analysis":
         values=[df["Good_Deal_RF"].sum(), len(df) - df["Good_Deal_RF"].sum()]
     )
     st.plotly_chart(fig)
+
 
 # ================== PRICE CALCULATOR ==================
 elif app_mode == "🧮 Price Calculator":
@@ -198,7 +218,7 @@ elif app_mode == "🧮 Price Calculator":
     if st.button("🚀 Predict Price"):
         input_data = pd.DataFrame([{
             "Present_Price": asking_price,
-            "Kms_Driven": kms,
+            "Driven_kms": kms,
             "Owner": owner,
             "Car_Age": car_age,
             "Fuel_Type_Diesel": 1 if fuel == "Diesel" else 0,
