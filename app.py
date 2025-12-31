@@ -34,7 +34,7 @@ app_mode = st.sidebar.selectbox(
 @st.cache_data
 def load_data():
     df = pd.read_csv("CAR DATA1.csv")
-    df.columns = df.columns.str.strip()  # Strip whitespace from columns
+    df.columns = df.columns.str.strip()
     return df
 
 df_raw = load_data()
@@ -42,8 +42,7 @@ df_raw = load_data()
 # ---------------- Preprocessing ----------------
 df = df_raw.copy()
 df["Car_Age"] = 2025 - df["Year"]
-car_names = df_raw["Car_Name"].unique()  # Keep for selection
-
+car_names = df_raw["Car_Name"].unique()
 df.drop(["Year", "Car_Name"], axis=1, inplace=True)
 df = pd.get_dummies(
     df,
@@ -79,6 +78,10 @@ df["Predicted_RF"] = rf.predict(X)
 df["Good_Deal_LR"] = (df["Selling_Price"] < df["Predicted_LR"]).astype(int)
 df["Good_Deal_RF"] = (df["Selling_Price"] < df["Predicted_RF"]).astype(int)
 
+# Function to safely compute RMSE
+def compute_rmse(y_true, y_pred):
+    return mean_squared_error(y_true, y_pred) ** 0.5
+
 # ================== DATA OVERVIEW ==================
 if app_mode == "📊 Data Overview":
     st.title("📊 Data Overview")
@@ -109,7 +112,7 @@ elif app_mode == "🤖 Model Evaluation & Comparison":
     with col1:
         st.subheader("Linear Regression")
         st.metric("MAE", round(mean_absolute_error(y_test, y_lr), 3))
-        st.metric("RMSE", round(mean_squared_error(y_test, y_lr, squared=False), 3))
+        st.metric("RMSE", round(compute_rmse(y_test, y_lr), 3))
         st.metric("R²", round(r2_score(y_test, y_lr), 3))
         st.subheader("Actual vs Predicted (LR)")
         fig = px.scatter(x=y_test, y=y_lr, labels={"x": "Actual", "y": "Predicted"})
@@ -118,30 +121,28 @@ elif app_mode == "🤖 Model Evaluation & Comparison":
     with col2:
         st.subheader("Random Forest")
         st.metric("MAE", round(mean_absolute_error(y_test, y_rf), 3))
-        st.metric("RMSE", round(mean_squared_error(y_test, y_rf, squared=False), 3))
+        st.metric("RMSE", round(compute_rmse(y_test, y_rf), 3))
         st.metric("R²", round(r2_score(y_test, y_rf), 3))
         st.subheader("Actual vs Predicted (RF)")
         fig = px.scatter(x=y_test, y=y_rf, labels={"x": "Actual", "y": "Predicted"})
         st.plotly_chart(fig, use_container_width=True)
 
-    # Comparison Table
     st.subheader("Comparison Table")
     metrics = pd.DataFrame({
         "Metric": ["MAE", "RMSE", "R²"],
         "Linear Regression": [
             mean_absolute_error(y_test, y_lr),
-            mean_squared_error(y_test, y_lr, squared=False),
+            compute_rmse(y_test, y_lr),
             r2_score(y_test, y_lr)
         ],
         "Random Forest": [
             mean_absolute_error(y_test, y_rf),
-            mean_squared_error(y_test, y_rf, squared=False),
+            compute_rmse(y_test, y_rf),
             r2_score(y_test, y_rf)
         ]
     })
     st.dataframe(metrics)
 
-    # Comparison Bar Chart
     fig = px.bar(metrics, x="Metric", y=["Linear Regression", "Random Forest"], barmode="group")
     st.plotly_chart(fig, use_container_width=True)
 
@@ -169,7 +170,6 @@ elif app_mode == "🧮 Price Calculator":
 
     avg_year = int(car_df["Year"].mean())
 
-    # Detect kilometers column dynamically
     kms_col = None
     for col in df_raw.columns:
         if "kms" in col.lower() or "kilometer" in col.lower():
