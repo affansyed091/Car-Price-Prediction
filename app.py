@@ -100,9 +100,6 @@ if app_mode == "📊 Data Overview":
     fig = px.histogram(df_raw, x="Selling_Price", nbins=30)
     st.plotly_chart(fig, use_container_width=True)
 
-    st.subheader("Dataset Columns")
-    st.write(df_raw.columns.tolist())
-
 # ================== MODEL EVALUATION & COMPARISON ==================
 elif app_mode == "🤖 Model Evaluation & Comparison":
     st.title("🤖 Model Evaluation & Comparison")
