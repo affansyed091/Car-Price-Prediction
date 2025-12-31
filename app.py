@@ -22,11 +22,11 @@ st.sidebar.title("🚗 Navigation")
 app_mode = st.sidebar.selectbox(
     "Choose a page:",
     [
-        "Data Overview",
-        "Model Evaluation",
-        "Model Comparison",
-        "Good Deal Analysis",
-        "Price Calculator"
+        "📊 Data Overview",
+        "🤖 Model Evaluation",
+        "📈 Model Comparison",
+        "🔮 Good Deal Analysis",
+        "🧮 Price Calculator"
     ]
 )
 
