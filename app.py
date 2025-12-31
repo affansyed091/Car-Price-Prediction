@@ -101,8 +101,9 @@ if app_mode == "📊 Data Overview":
     st.plotly_chart(fig, use_container_width=True)
 
 
+
 # ================== MODEL EVALUATION & COMPARISON ==================
-elif app_mode == "🤖 Model Evaluation Comparison":
+elif app_mode == "🤖 Model Evaluation & Comparison":
     st.title("🤖 Model Evaluation & Comparison")
 
     col1, col2 = st.columns(2)
@@ -110,7 +111,7 @@ elif app_mode == "🤖 Model Evaluation Comparison":
     with col1:
         st.subheader("Linear Regression")
         st.metric("MAE", f"{mean_absolute_error(y_test, y_lr):.2f}")
-        st.metric("RMSE", f"{compute_rmse(y_test, y_lr):.2f}")
+        st.metric("RMSE", f"{mean_squared_error(y_test, y_lr, squared=False):.2f}")
         st.metric("R²", f"{r2_score(y_test, y_lr):.2f}")
         st.subheader("Actual vs Predicted (LR)")
         fig = px.scatter(x=y_test, y=y_lr, labels={"x": "Actual", "y": "Predicted"})
@@ -119,7 +120,7 @@ elif app_mode == "🤖 Model Evaluation Comparison":
     with col2:
         st.subheader("Random Forest")
         st.metric("MAE", f"{mean_absolute_error(y_test, y_rf):.2f}")
-        st.metric("RMSE", f"{compute_rmse(y_test, y_rf):.2f}")
+        st.metric("RMSE", f"{mean_squared_error(y_test, y_rf, squared=False):.2f}")
         st.metric("R²", f"{r2_score(y_test, y_rf):.2f}")
         st.subheader("Actual vs Predicted (RF)")
         fig = px.scatter(x=y_test, y=y_rf, labels={"x": "Actual", "y": "Predicted"})
@@ -130,12 +131,12 @@ elif app_mode == "🤖 Model Evaluation Comparison":
         "Metric": ["MAE", "RMSE", "R²"],
         "Linear Regression": [
             round(mean_absolute_error(y_test, y_lr), 2),
-            round(compute_rmse(y_test, y_lr), 2),
+            round(mean_squared_error(y_test, y_lr, squared=False), 2),
             round(r2_score(y_test, y_lr), 2)
         ],
         "Random Forest": [
             round(mean_absolute_error(y_test, y_rf), 2),
-            round(compute_rmse(y_test, y_rf), 2),
+            round(mean_squared_error(y_test, y_rf, squared=False), 2),
             round(r2_score(y_test, y_rf), 2)
         ]
     })
