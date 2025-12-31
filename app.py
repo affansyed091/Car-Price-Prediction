@@ -1,254 +1,37 @@
-import streamlit as st
-import pandas as pd
-import numpy as np
-import matplotlib.pyplot as plt
-import seaborn as sns
-import plotly.express as px
-
-from sklearn.model_selection import train_test_split
-from sklearn.linear_model import LinearRegression
-from sklearn.ensemble import RandomForestRegressor
-from sklearn.metrics import r2_score, mean_absolute_error, mean_squared_error
-
-# ---------------- Page Config ----------------
-st.set_page_config(
-    page_title="Car Price Prediction App",
-    page_icon="🚗",
-    layout="wide"
-)
-
-# ---------------- Sidebar ----------------
-st.sidebar.title("🚗 Navigation")
-app_mode = st.sidebar.selectbox(
-    "Choose a page:",
-    [
-        "📊 Data Overview",
-        "🤖 Model Evaluation",
-        "📈 Model Comparison",
-        "🔮 Good Deal Analysis",
-        "🧮 Price Calculator"
-    ]
-)
-
-# ---------------- Load Data ----------------
-@st.cache_data
-def load_data():
-    return pd.read_csv("CAR DATA1.csv")
-
-df_raw = load_data()
-
-# ---------------- Preprocessing ----------------
-df = df_raw.copy()
-df["Car_Age"] = 2025 - df["Year"]
-df.drop(["Year", "Car_Name"], axis=1, inplace=True)
-
-df = pd.get_dummies(
-    df,
-    columns=["Fuel_Type", "Selling_type", "Transmission"],
-    drop_first=True
-)
-
-X = df.drop("Selling_Price", axis=1)
-y = df["Selling_Price"]
-
-# ---------------- Train Models ----------------
-@st.cache_resource
-def train_models(X, y):
-    X_train, X_test, y_train, y_test = train_test_split(
-        X, y, test_size=0.2, random_state=42
-    )
-
-    lr = LinearRegression()
-    rf = RandomForestRegressor(
-        n_estimators=200,
-        random_state=42
-    )
-
-    lr.fit(X_train, y_train)
-    rf.fit(X_train, y_train)
-
-    return lr, rf, X_train, X_test, y_train, y_test
-
-lr, rf, X_train, X_test, y_train, y_test = train_models(X, y)
-
-y_lr = lr.predict(X_test)
-y_rf = rf.predict(X_test)
-
-df["Predicted_LR"] = lr.predict(X)
-df["Predicted_RF"] = rf.predict(X)
-df["Good_Deal_LR"] = (df["Selling_Price"] < df["Predicted_LR"]).astype(int)
-df["Good_Deal_RF"] = (df["Selling_Price"] < df["Predicted_RF"]).astype(int)
-
-# ================== DATA OVERVIEW ==================
-if app_mode == "📊 Data Overview":
-    st.title("📊 Data Overview")
-
-    st.subheader("Dataset Preview")
-    st.dataframe(df_raw.head())
-
-    st.subheader("Statistical Summary")
-    st.dataframe(df.describe())
-
-    st.subheader("Correlation Heatmap")
-    fig, ax = plt.subplots(figsize=(10, 6))
-    sns.heatmap(df.corr(), cmap="coolwarm")
-    st.pyplot(fig)
-
-    st.subheader("Selling Price Distribution")
-    fig = px.histogram(df_raw, x="Selling_Price", nbins=30)
-    st.plotly_chart(fig, use_container_width=True)
-
-# ================== MODEL EVALUATION ==================
-elif app_mode == "🤖 Model Evaluation":
-    st.title("🤖 Model Evaluation")
-
-    col1, col2 = st.columns(2)
-
-    with col1:
-        st.subheader("Linear Regression")
-        st.metric("MAE", round(mean_absolute_error(y_test, y_lr), 3))
-        st.metric("RMSE", round(mean_squared_error(y_test, y_lr)**0.5, 3))
-        st.metric("R²", round(r2_score(y_test, y_lr), 3))
-
-    with col2:
-        st.subheader("Random Forest")
-        st.metric("MAE", round(mean_absolute_error(y_test, y_rf), 3))
-        st.metric("RMSE", round(mean_squared_error(y_test, y_rf)**0.5, 3))
-        st.metric("R²", round(r2_score(y_test, y_rf), 3))
-
-    st.subheader("Actual vs Predicted (Random Forest)")
-    fig = px.scatter(x=y_test, y=y_rf, labels={"x": "Actual", "y": "Predicted"})
-    st.plotly_chart(fig, use_container_width=True)
-
-# ================== MODEL COMPARISON ==================
-elif app_mode == "📈 Model Comparison":
-    st.title("📈 Model Comparison")
-
-    metrics = pd.DataFrame({
-        "Metric": ["MAE", "RMSE", "R²"],
-        "Linear Regression": [
-            mean_absolute_error(y_test, y_lr),
-            mean_squared_error(y_test, y_lr)**0.5,
-            r2_score(y_test, y_lr)
-        ],
-        "Random Forest": [
-            mean_absolute_error(y_test, y_rf),
-            mean_squared_error(y_test, y_rf)**0.5,
-            r2_score(y_test, y_rf)
-        ]
-    })
-
-    st.dataframe(metrics)
-
-    fig = px.bar(
-        metrics,
-        x="Metric",
-        y=["Linear Regression", "Random Forest"],
-        barmode="group"
-    )
-    st.plotly_chart(fig, use_container_width=True)
-
-# ================== GOOD DEAL ANALYSIS ==================
-elif app_mode == "🔮 Good Deal Analysis":
-    st.title("🔮 Good Deal Analysis")
-
-    col1, col2 = st.columns(2)
-    col1.metric("Good Deals (LR)", df["Good_Deal_LR"].sum())
-    col2.metric("Good Deals (RF)", df["Good_Deal_RF"].sum())
-
-    fig = px.pie(
-        names=["Good Deal", "Not Good Deal"],
-        values=[df["Good_Deal_RF"].sum(), len(df) - df["Good_Deal_RF"].sum()]
-    )
-    st.plotly_chart(fig)
-
 # ================== PRICE CALCULATOR ==================
 elif app_mode == "🧮 Price Calculator":
     st.title("🧮 Car Price Calculator")
 
-    st.write("Enter car details to predict its selling price")
-
-    col1, col2 = st.columns(2)
-
-    with col1:
-        present_price = st.number_input("Current Market Price (Lakhs)", 0.0, 50.0, 5.0)
-        kms = st.number_input("Kilometers Driven", 0, 500000, 30000)
-        owner = st.selectbox("Owner Type", [0, 1, 3])
-        car_age = st.slider("Car Age (Years)", 0, 25, 5)
-
-    with col2:
-        fuel = st.selectbox("Fuel Type", ["Petrol", "Diesel"])
-        seller = st.selectbox("Seller Type", ["Dealer", "Individual"])
-        transmission = st.selectbox("Transmission", ["Manual", "Automatic"])
-
-    if st.button("🚀 Predict Price"):
-        input_data = pd.DataFrame([{
-            "Present_Price": present_price,
-            "Kms_Driven": kms,
-            "Owner": owner,
-            "Car_Age": car_age,
-            "Fuel_Type_Diesel": 1 if fuel == "Diesel" else 0,
-            "Selling_type_Individual": 1 if seller == "Individual" else 0,
-            "Transmission_Manual": 1 if transmission == "Manual" else 0
-        }])
-
-        input_data = input_data.reindex(columns=X.columns, fill_value=0)
-
-        predicted_price = rf.predict(input_data)[0]
-
-        st.success(f"💰 Predicted Selling Price: {predicted_price:.2f} Lakhs")
-
-        if present_price <= predicted_price:
-            st.success("🟢 This car is Reasonably Priced / Good Deal")
-        else:
-            st.error("🔴 This car is Overpriced")
-
-        fig, ax = plt.subplots()
-        ax.bar(
-            ["Entered Price", "Predicted Price", "Market Average"],
-            [present_price, predicted_price, df["Selling_Price"].mean()]
-        )
-        ax.set_ylabel("Price (Lakhs)")
-        ax.set_title("Price Comparison")
-        st.pyplot(fig)
-        # ================== PRICE CALCULATOR ==================
-elif app_mode == "🧮 Price Calculator":
-    st.title("🧮 Car Price Calculator")
-
-    st.write("Select a car and check whether its asking price is reasonable")
+    st.write("You can either enter car details manually or select a car to get historical insights.")
 
     # ---- Car Name Selection ----
     car_name = st.selectbox(
-        "Select Car Name",
-        sorted(df_raw["Car_Name"].unique())
+        "Select Car Name (optional, leave blank to enter manually)",
+        [""] + sorted(df_raw["Car_Name"].unique())
     )
 
-    # Filter historical data for selected car
-    car_df = df_raw[df_raw["Car_Name"] == car_name]
+    if car_name:  # User selected a car
+        car_df = df_raw[df_raw["Car_Name"] == car_name]
+        avg_year = int(car_df["Year"].mean())
+        avg_kms = int(car_df["Kms_Driven"].mean())
+        avg_owner = int(car_df["Owner"].mode()[0])
+        avg_price = float(car_df["Selling_Price"].mean())
 
-    # Use historical averages
-    avg_year = int(car_df["Year"].mean())
-    avg_kms = int(car_df["Kms_Driven"].mean())
-    avg_owner = int(car_df["Owner"].mode()[0])
-    avg_price = float(car_df["Selling_Price"].mean())
-
-    st.info(f"📊 Historical Average Price: {avg_price:.2f} Lakhs")
+        st.info(f"📊 Historical Average Price for {car_name}: {avg_price:.2f} Lakhs")
+    else:  # Manual input default values
+        avg_year = 2020
+        avg_kms = 30000
+        avg_owner = 0
+        avg_price = 5.0
 
     col1, col2 = st.columns(2)
 
     with col1:
         asking_price = st.number_input(
-            "Asking Price (Lakhs)",
-            0.0, 50.0, round(avg_price, 2)
+            "Asking Price (Lakhs)", 0.0, 50.0, round(avg_price, 2)
         )
-        kms = st.number_input(
-            "Kilometers Driven",
-            0, 500000, avg_kms
-        )
-        car_age = st.slider(
-            "Car Age (Years)",
-            0, 25, 2025 - avg_year
-        )
+        kms = st.number_input("Kilometers Driven", 0, 500000, avg_kms)
+        car_age = st.slider("Car Age (Years)", 0, 25, 2025 - avg_year)
 
     with col2:
         owner = st.selectbox("Owner Type", [0, 1, 3], index=0)
@@ -267,9 +50,7 @@ elif app_mode == "🧮 Price Calculator":
             "Transmission_Manual": 1 if transmission == "Manual" else 0
         }])
 
-        # Align columns with training data
         input_data = input_data.reindex(columns=X.columns, fill_value=0)
-
         predicted_price = rf.predict(input_data)[0]
 
         st.success(f"💰 Predicted Fair Price: {predicted_price:.2f} Lakhs")
@@ -284,9 +65,9 @@ elif app_mode == "🧮 Price Calculator":
         fig, ax = plt.subplots()
         ax.bar(
             ["Asking Price", "Predicted Price", "Historical Avg"],
-            [asking_price, predicted_price, avg_price]
+            [asking_price, predicted_price, avg_price],
+            color=['orange', 'green', 'blue']
         )
         ax.set_ylabel("Price (Lakhs)")
-        ax.set_title(f"Price Comparison for {car_name}")
+        ax.set_title(f"Price Comparison{' for ' + car_name if car_name else ''}")
         st.pyplot(fig)
-
