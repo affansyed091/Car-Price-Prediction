@@ -82,46 +82,23 @@ df["Good_Deal_RF"] = (df["Selling_Price"] < df["Predicted_RF"]).astype(int)
 def compute_rmse(y_true, y_pred):
     return mean_squared_error(y_true, y_pred) ** 0.5
 
-
 # ================== DATA OVERVIEW ==================
 if app_mode == "📊 Data Overview":
     st.title("📊 Data Overview")
-    
-    st.subheader("Complete Dataset")
-    st.dataframe(df_raw)  # <-- show full dataset
+    st.subheader("Dataset Preview")
+    st.dataframe(df_raw.head())
 
     st.subheader("Statistical Summary")
-    st.dataframe(df_raw.describe())
+    st.dataframe(df.describe())
 
-    st.subheader("Correlation Heatmap (Key Features vs Selling_Price)")
+    st.subheader("Correlation Heatmap")
+    fig, ax = plt.subplots(figsize=(10, 6))
+    sns.heatmap(df.corr(), cmap="coolwarm", annot=True)
+    st.pyplot(fig)
 
-    # Select relevant columns safely
-    key_columns = ["Selling_Price", "Present_Price", "Car_Age"]
-    cat_columns = ["Fuel_Type", "Transmission"]
-
-    # Make a copy
-    corr_df = df_raw[key_columns + cat_columns].copy()
-
-    # Convert categorical features to numeric
-    corr_df = pd.get_dummies(corr_df, columns=cat_columns, drop_first=True)
-
-st.subheader("Correlation Heatmap (Key Features vs Selling_Price)")
-
-# Create Car_Age for correlation
-df_corr = df_raw.copy()
-df_corr["Car_Age"] = 2025 - df_corr["Year"]
-
-# Select only relevant columns
-key_columns = ["Selling_Price", "Present_Price", "Car_Age"]
-cat_columns = ["Fuel_Type", "Transmission"]
-
-# Convert categorical features to numeric for correlation
-corr_df = pd.get_dummies(df_corr[key_columns + cat_columns], drop_first=True)
-
-# Plot heatmap
-fig, ax = plt.subplots(figsize=(10, 6))
-sns.heatmap(corr_df.corr(), cmap="coolwarm", annot=True)
-st.pyplot(fig)
+    st.subheader("Selling Price Distribution")
+    fig = px.histogram(df_raw, x="Selling_Price", nbins=30)
+    st.plotly_chart(fig, use_container_width=True)
 
 # ================== MODEL EVALUATION & COMPARISON ==================
 elif app_mode == "🤖 Model Evaluation & Comparison":
