@@ -1,0 +1,301 @@
+Company,Car_Name,Year,Selling_Price,Present_Price,Driven_kms,Fuel_Type,Selling_type,Transmission,Owner
+MG,MG 4,2023,7869528,10800000,49583,Hybrid,Individual,Automatic,1
+Proton,X70,2009,1828872,3500000,24088,Petrol,Individual,Manual,1
+Haval,Jolion,2017,15894265,19600000,85050,Electric,Dealer,Manual,1
+Hyundai,Tucson Ultimate,2014,21545346,24500000,196425,Diesel,Individual,Automatic,0
+Suzuki,Fronx,2013,28968603,39000000,156283,Petrol,Individual,Automatic,0
+Suzuki,Alto VXR,2010,11650738,14900000,193263,Hybrid,Dealer,Automatic,0
+Mercedes,C-Class,2011,32873196,42000000,33083,Electric,Dealer,Automatic,2
+BMW,5 Series,2005,10723497,12700000,198223,Hybrid,Dealer,Automatic,2
+Kia,Picanto AT,2021,3865403,4300000,25396,Hybrid,Individual,Manual,1
+Hyundai,Tucson GLS,2012,12518568,20200000,90042,Petrol,Dealer,Automatic,0
+Toyota,Corolla Altis,2013,19343786,35000000,118626,Electric,Dealer,Automatic,0
+Haval,H6 HEV,2024,5585450,7000000,29722,Hybrid,Individual,Manual,0
+Suzuki,Wagon R VXR,2010,36019450,47100000,131061,Electric,Dealer,Automatic,1
+Proton,X70,2020,1647359,2500000,104345,Electric,Individual,Manual,2
+Toyota,Prado,2017,27159369,47200000,58477,Diesel,Dealer,Automatic,2
+Toyota,Corolla Altis,2017,20521476,24700000,76896,Electric,Dealer,Manual,2
+MG,HS Essence,2019,25832202,39200000,151585,Hybrid,Dealer,Manual,2
+Hyundai,Palisade,2005,5707036,7300000,2031,Hybrid,Individual,Automatic,0
+Audi,A6,2019,4172283,6900000,187155,Diesel,Individual,Manual,1
+BYD,Sealion 6,2024,14511131,28300000,138445,Diesel,Dealer,Manual,0
+Kia,Sportage AWD,2005,14796809,19500000,71722,Electric,Dealer,Automatic,2
+BMW,3 Series,2016,2162332,3400000,29559,Hybrid,Dealer,Manual,1
+Suzuki,Bolan,2019,5635251,6500000,152525,Petrol,Dealer,Automatic,2
+Suzuki,Cultus VXL,2011,15774636,21700000,44552,Diesel,Dealer,Manual,1
+Honda,City 1.5 Aspire,2007,31661889,38300000,115336,Hybrid,Individual,Manual,1
+Suzuki,Swift GLX CVT,2006,2404957,3500000,62301,Petrol,Individual,Manual,2
+Toyota,Prado,2014,32110488,39900000,128563,Diesel,Individual,Automatic,2
+MG,HS Essence,2012,18187701,20300000,180902,Electric,Dealer,Automatic,0
+Hyundai,Elantra 2.0,2022,4476047,7700000,80935,Electric,Individual,Manual,0
+MG,HS Essence,2022,24733174,29400000,119544,Electric,Individual,Manual,1
+Kia,Stonic EX+,2014,30759335,48200000,118896,Petrol,Dealer,Automatic,2
+BYD,Atto 2,2005,15032782,22500000,44623,Hybrid,Dealer,Manual,0
+Kia,Sportage Alpha,2007,4958103,6100000,82677,Hybrid,Individual,Manual,2
+Kia,Sportage Alpha,2009,28346523,33400000,137622,Petrol,Dealer,Automatic,2
+BYD,Seal,2015,14313623,27400000,14928,Diesel,Individual,Automatic,2
+Honda,City 1.2 LS,2023,32365756,47800000,70384,Diesel,Individual,Automatic,2
+Suzuki,Alto VX,2007,7730623,13000000,67281,Petrol,Dealer,Manual,1
+Suzuki,Alto VXL,2021,35874786,42800000,117010,Diesel,Dealer,Automatic,1
+Toyota,Fortuner V,2008,2502519,4200000,74971,Electric,Individual,Manual,1
+Suzuki,Alto VXR,2022,6767921,8500000,139332,Hybrid,Dealer,Automatic,0
+Suzuki,Alto VX,2016,7448011,8800000,144719,Petrol,Individual,Manual,0
+BMW,3 Series,2024,20575243,30400000,56650,Diesel,Dealer,Automatic,2
+Kia,Sorento AWD,2022,25026540,35400000,90426,Petrol,Individual,Manual,2
+Honda,BR-V CVT-S,2018,13112979,25700000,3768,Electric,Individual,Manual,1
+Suzuki,Cultus VXL,2009,3772995,6300000,144793,Petrol,Individual,Automatic,0
+Changan,Alsvin Lumiere,2015,14068098,19600000,15086,Electric,Individual,Automatic,1
+Toyota,Hilux Revo Rocco,2014,26144472,38100000,140554,Diesel,Individual,Automatic,2
+Kia,Stonic EX+,2024,7118047,8000000,32852,Diesel,Individual,Automatic,2
+Toyota,Fortuner V,2014,35650524,48700000,80575,Electric,Individual,Automatic,2
+Honda,HR-V e:HEV,2006,3181163,4400000,180826,Petrol,Individual,Manual,2
+Changan,Alsvin Lumiere,2020,7366394,8200000,186267,Hybrid,Individual,Automatic,1
+Toyota,Land Cruiser 300,2006,11253743,17200000,60710,Electric,Dealer,Automatic,1
+Kia,Sportage AWD,2015,26983231,39800000,149960,Diesel,Individual,Automatic,0
+Suzuki,Fronx,2009,10673556,19200000,149280,Electric,Dealer,Automatic,0
+Changan,Alsvin Lumiere,2014,20038829,34200000,183007,Petrol,Individual,Automatic,1
+Hyundai,Tucson Ultimate,2022,15114592,27000000,168125,Diesel,Individual,Automatic,1
+Hyundai,Sonata 2.5,2009,36134318,43300000,70568,Petrol,Individual,Manual,1
+Hyundai,Tucson GLS,2005,17460103,22300000,157271,Electric,Dealer,Automatic,0
+Honda,Civic Standard,2019,16665901,18600000,188979,Petrol,Individual,Automatic,2
+Changan,Alsvin Lumiere,2022,23377033,32100000,128761,Hybrid,Dealer,Manual,2
+Haval,Jolion,2018,16974288,33400000,161993,Electric,Dealer,Automatic,1
+Toyota,Prado,2011,16858082,28000000,95799,Diesel,Individual,Manual,2
+Suzuki,Fronx,2022,20491767,24700000,120151,Petrol,Dealer,Automatic,2
+DFSK,Glory 500,2023,14694067,26200000,137822,Petrol,Dealer,Automatic,0
+Hyundai,Palisade,2012,28357081,42400000,73737,Electric,Dealer,Manual,2
+Audi,A6,2021,32405170,46900000,59173,Hybrid,Individual,Automatic,2
+Toyota,Yaris ATIV X,2015,33925335,45600000,104539,Diesel,Dealer,Manual,2
+Kia,Stonic EX+,2011,16786096,23700000,76329,Diesel,Dealer,Manual,0
+Toyota,Corolla GLi,2024,24409928,29100000,77229,Hybrid,Dealer,Manual,2
+BMW,3 Series,2019,37768405,45000000,111666,Petrol,Dealer,Automatic,0
+Honda,HR-V VTi,2021,7267987,12000000,199466,Hybrid,Dealer,Automatic,0
+Suzuki,Bolan,2020,20401145,33000000,198091,Electric,Individual,Automatic,2
+Toyota,Hilux Revo V,2010,24685410,40200000,179461,Diesel,Dealer,Automatic,1
+BYD,Seal,2009,1219909,1600000,112501,Electric,Dealer,Automatic,2
+Suzuki,Carry,2016,12267401,17000000,117051,Diesel,Individual,Manual,0
+BYD,Atto 2,2018,17165779,25300000,136676,Electric,Dealer,Automatic,0
+Toyota,Fortuner V,2008,3631891,4500000,192776,Electric,Individual,Manual,2
+Honda,Civic RS,2014,23888358,28600000,129308,Electric,Individual,Automatic,1
+Honda,HR-V VTi,2006,5993522,9600000,5543,Hybrid,Dealer,Automatic,0
+Chery,Tiggo 7 PHEV,2022,3451759,6500000,52174,Petrol,Dealer,Automatic,1
+Toyota,Yaris ATIV,2022,32407462,49100000,167085,Electric,Dealer,Manual,0
+Toyota,Corolla XLi,2014,15554999,20600000,46828,Petrol,Dealer,Automatic,2
+Toyota,Corolla Altis,2022,13441743,21000000,150127,Diesel,Dealer,Manual,0
+Kia,Sportage Alpha,2022,3803920,5000000,145346,Petrol,Individual,Manual,0
+Suzuki,Bolan,2014,32253164,40800000,132914,Hybrid,Dealer,Automatic,2
+BYD,Atto 2,2018,26166537,42100000,149375,Petrol,Individual,Automatic,0
+Toyota,Hilux Revo Rocco,2015,24456643,35000000,59771,Electric,Dealer,Manual,0
+Hyundai,Palisade,2024,10958131,18000000,90591,Electric,Dealer,Automatic,0
+Suzuki,Fronx,2021,9906279,17000000,146960,Diesel,Dealer,Automatic,1
+Hyundai,Tucson GLS,2021,12594720,14500000,25407,Petrol,Dealer,Automatic,0
+Toyota,Corolla Grande,2009,8529625,11600000,79171,Electric,Individual,Automatic,2
+BMW,iX,2005,8445839,10600000,7444,Petrol,Dealer,Automatic,2
+Suzuki,Cultus VXL,2016,6680283,9500000,159056,Diesel,Dealer,Manual,2
+Suzuki,Carry,2011,20668021,35800000,21384,Petrol,Dealer,Automatic,2
+Mercedes,C-Class,2015,1797048,3500000,170787,Electric,Dealer,Manual,2
+Haval,H6 HEV,2015,5741052,11300000,175657,Electric,Dealer,Automatic,0
+Suzuki,Swift GLX CVT,2023,13000412,15300000,132396,Electric,Dealer,Automatic,1
+Mercedes,S-Class,2022,9866234,16500000,86824,Petrol,Individual,Automatic,1
+Honda,HR-V e:HEV,2009,21364897,41600000,159863,Diesel,Individual,Automatic,2
+Toyota,Yaris ATIV,2020,11752156,18100000,6558,Hybrid,Dealer,Automatic,2
+Honda,Civic RS,2009,30667426,35100000,74308,Diesel,Individual,Automatic,0
+Suzuki,Alto VX,2009,10257236,12200000,100675,Electric,Dealer,Manual,0
+Toyota,Corolla GLi,2016,10693895,17500000,25475,Petrol,Individual,Manual,1
+BMW,3 Series,2019,28253814,31800000,160441,Electric,Individual,Automatic,2
+Audi,A3,2011,25891898,31700000,137804,Diesel,Dealer,Automatic,0
+Mercedes,C-Class,2013,38586949,49000000,108582,Hybrid,Individual,Automatic,1
+DFSK,Glory 500,2024,1911422,2500000,156301,Diesel,Dealer,Manual,0
+DFSK,Glory 500,2010,12337603,17100000,69060,Hybrid,Dealer,Manual,2
+Suzuki,Alto VXR,2021,12201971,14000000,65716,Hybrid,Individual,Manual,0
+Suzuki,Cultus VXL,2006,24013094,39600000,5403,Petrol,Individual,Automatic,1
+Toyota,Corolla XLi,2021,26516339,37100000,93196,Electric,Dealer,Automatic,2
+Haval,Tank 500,2015,2779330,3500000,63586,Electric,Individual,Automatic,2
+Kia,Sportage Alpha,2022,35235193,48900000,67375,Electric,Dealer,Automatic,2
+Honda,Civic Oriel,2009,27397534,38400000,125346,Diesel,Dealer,Automatic,0
+Suzuki,Alto VXR,2017,2512808,3000000,40656,Petrol,Individual,Automatic,1
+Honda,Civic Oriel,2023,7057422,11300000,160039,Petrol,Dealer,Manual,1
+Mercedes,E-Class,2009,20498299,36200000,143077,Electric,Dealer,Manual,0
+MG,HS Essence,2016,22017211,29900000,39130,Diesel,Individual,Automatic,2
+DFSK,Glory 580,2023,15834671,27400000,156883,Petrol,Dealer,Manual,2
+Changan,Alsvin Lumiere,2009,16891958,19200000,196365,Electric,Dealer,Automatic,0
+Toyota,Corolla GLi,2019,19590454,35200000,52927,Diesel,Dealer,Automatic,1
+Mercedes,E-Class,2010,4357027,5800000,151144,Hybrid,Dealer,Automatic,2
+Kia,Sportage AWD,2010,26803737,31800000,44225,Diesel,Individual,Automatic,1
+Honda,Civic Oriel,2011,11252753,12900000,34851,Petrol,Individual,Manual,2
+Toyota,Yaris ATIV,2008,17700897,34500000,11766,Petrol,Individual,Automatic,1
+Toyota,Corolla Grande,2012,7484982,9000000,186027,Hybrid,Dealer,Manual,2
+Hyundai,Tucson GLS,2024,23097154,42800000,65088,Diesel,Individual,Automatic,2
+Mercedes,E-Class,2023,5194830,6300000,44356,Electric,Dealer,Automatic,1
+Toyota,Hilux Revo V,2009,6081919,10400000,107768,Petrol,Individual,Automatic,2
+MG,ZS EV,2024,30670655,42200000,27344,Petrol,Dealer,Manual,1
+Audi,A6,2023,3245078,5300000,139224,Electric,Individual,Manual,0
+Hyundai,Palisade,2011,7176762,9900000,78149,Hybrid,Dealer,Automatic,0
+Honda,Civic Standard,2017,8318016,12800000,27289,Hybrid,Dealer,Automatic,1
+Hyundai,Elantra 2.0,2012,19624571,30300000,36657,Electric,Dealer,Manual,1
+Toyota,Corolla GLi,2015,32064001,40300000,120974,Hybrid,Dealer,Automatic,0
+Toyota,Fortuner Legender,2005,25667454,34200000,170362,Hybrid,Dealer,Manual,2
+Audi,A6,2022,29939723,45300000,15790,Electric,Individual,Manual,0
+Hyundai,Elantra 2.0,2020,24031856,42400000,167765,Petrol,Individual,Automatic,2
+Honda,Civic Standard,2006,11683408,17900000,3510,Hybrid,Dealer,Manual,2
+MG,ZS EV,2022,37417761,49700000,76437,Electric,Individual,Manual,1
+MG,Binguo,2010,25110888,39700000,113792,Hybrid,Dealer,Manual,1
+Suzuki,Carry,2016,22413951,40100000,103936,Hybrid,Dealer,Manual,2
+Mercedes,E-Class,2021,21628968,40100000,74478,Electric,Dealer,Automatic,2
+Audi,A6,2018,3134711,4700000,134346,Petrol,Individual,Manual,1
+Toyota,Yaris ATIV,2023,14051064,20000000,94337,Petrol,Dealer,Automatic,0
+Chery,Tiggo 8 Pro,2008,24072273,30700000,185473,Petrol,Individual,Manual,1
+Toyota,Hilux Revo V,2024,28717128,42700000,107578,Petrol,Individual,Manual,1
+Suzuki,Fronx,2021,31653732,44400000,116880,Hybrid,Individual,Automatic,1
+Suzuki,Cultus VXL,2010,25129524,36400000,79729,Hybrid,Individual,Automatic,1
+Toyota,Corolla XLi,2006,36347844,49500000,78377,Petrol,Individual,Manual,1
+Haval,Tank 500,2011,20287894,32500000,188477,Petrol,Dealer,Manual,2
+Audi,e-tron,2012,14651336,20700000,40059,Petrol,Dealer,Automatic,2
+Hyundai,Sonata 2.5,2006,12648454,18700000,151245,Petrol,Individual,Automatic,2
+Mercedes,E-Class,2024,1187668,1800000,32242,Diesel,Dealer,Automatic,2
+Toyota,Corolla GLi,2009,6078669,8000000,103049,Hybrid,Dealer,Manual,2
+Toyota,Fortuner Legender,2005,16651872,27300000,133130,Diesel,Individual,Manual,0
+Suzuki,Alto VX,2006,33753268,47100000,41761,Petrol,Dealer,Manual,2
+DFSK,Glory 500,2005,17236891,23200000,84274,Diesel,Individual,Automatic,2
+Honda,BR-V CVT-S,2010,14761249,24300000,36128,Hybrid,Individual,Manual,0
+Chery,Tiggo 7 PHEV,2007,11647561,19600000,72031,Diesel,Dealer,Automatic,0
+Honda,Civic RS,2010,7439993,14700000,183685,Petrol,Dealer,Manual,1
+Toyota,Fortuner V,2012,8573207,15700000,53507,Diesel,Dealer,Manual,0
+Kia,Sorento AWD,2008,3205388,6300000,42454,Diesel,Individual,Automatic,0
+Suzuki,Wagon R VXR,2020,29105851,42600000,181071,Diesel,Dealer,Automatic,2
+Honda,Civic Oriel,2013,33811944,38000000,28820,Hybrid,Individual,Manual,1
+Suzuki,Fronx,2005,37809284,48000000,134942,Electric,Individual,Automatic,0
+Proton,X70,2018,38130255,45000000,34871,Hybrid,Dealer,Manual,1
+Toyota,Fortuner Legender,2009,9068826,12000000,98018,Electric,Individual,Automatic,1
+MG,MG 4,2006,4779990,6800000,107317,Petrol,Dealer,Automatic,1
+Haval,Jolion,2021,12127335,17300000,97478,Hybrid,Individual,Automatic,0
+Toyota,Corolla GLi,2018,14700311,18300000,58681,Hybrid,Individual,Manual,1
+Toyota,Fortuner V,2005,27934245,40900000,17163,Diesel,Individual,Manual,0
+Kia,Picanto AT,2015,8668569,9800000,118376,Petrol,Dealer,Automatic,0
+Kia,Sportage Alpha,2005,28218647,39000000,69394,Diesel,Dealer,Automatic,2
+Mercedes,E-Class,2011,20522432,37100000,184642,Electric,Individual,Automatic,1
+Honda,HR-V VTi,2020,20078159,35600000,65375,Electric,Dealer,Manual,1
+Audi,A6,2005,28095365,31400000,60144,Electric,Dealer,Automatic,2
+Toyota,Hilux Revo Rocco,2008,11761997,22500000,87437,Electric,Individual,Automatic,1
+Mercedes,E-Class,2015,10008843,12400000,32641,Electric,Individual,Automatic,0
+Hyundai,Elantra 2.0,2019,3536191,4500000,21754,Electric,Individual,Automatic,2
+Mercedes,E-Class,2021,23690988,29800000,56028,Hybrid,Individual,Manual,1
+Toyota,Hilux Revo G,2009,20962729,26200000,20685,Electric,Individual,Manual,1
+Mercedes,E-Class,2009,26887060,40700000,104203,Diesel,Individual,Automatic,1
+Toyota,Corolla Altis,2019,21062412,32700000,30046,Diesel,Dealer,Automatic,1
+Honda,City 1.2 LS,2014,19925774,25100000,28471,Petrol,Dealer,Automatic,0
+Toyota,Fortuner Legender,2018,6102209,11200000,187590,Electric,Individual,Manual,1
+Suzuki,Swift GLX CVT,2015,21105597,30700000,16525,Electric,Individual,Manual,1
+Mercedes,E-Class,2021,21779419,25900000,174976,Hybrid,Individual,Automatic,1
+Toyota,Fortuner G,2022,13730664,19500000,158940,Hybrid,Dealer,Automatic,0
+Suzuki,Carry,2006,35080092,40700000,16099,Petrol,Individual,Automatic,1
+Proton,X70,2008,8341207,12500000,37244,Electric,Dealer,Automatic,1
+Toyota,Fortuner G,2011,882917,1100000,88596,Petrol,Individual,Manual,0
+Haval,Jolion,2014,40278316,45900000,45194,Electric,Individual,Automatic,2
+BYD,Seal,2005,19698239,22900000,97890,Diesel,Dealer,Manual,1
+Suzuki,Wagon R VXR,2007,10714585,14400000,160118,Petrol,Dealer,Manual,2
+Chery,Tiggo 8 Pro,2023,28551128,37900000,91695,Diesel,Individual,Manual,1
+Mercedes,S-Class,2005,21013412,30700000,125000,Diesel,Individual,Manual,2
+Toyota,Yaris ATIV X,2023,26732121,32700000,157238,Hybrid,Individual,Manual,0
+Suzuki,Cultus VXR,2007,23745643,41600000,120188,Petrol,Individual,Automatic,2
+Toyota,Prado,2007,834549,1000000,181588,Petrol,Dealer,Automatic,1
+BMW,3 Series,2010,2377188,3300000,191686,Hybrid,Individual,Automatic,0
+Suzuki,Cultus VXR,2007,14958496,27300000,113956,Petrol,Individual,Automatic,2
+Kia,Sorento AWD,2012,24325333,45800000,119206,Electric,Dealer,Manual,0
+Mercedes,E-Class,2023,37311718,49000000,46914,Petrol,Individual,Manual,2
+Haval,H6 HEV,2007,3057150,4800000,25075,Petrol,Individual,Manual,1
+Changan,Lumin,2009,23657732,42200000,165977,Diesel,Individual,Automatic,1
+BMW,iX,2017,9977379,12600000,167478,Diesel,Dealer,Manual,0
+Toyota,Corolla XLi,2008,17495041,30000000,21684,Electric,Dealer,Automatic,1
+DFSK,Glory 500,2012,24736271,45600000,121693,Petrol,Dealer,Automatic,0
+Hyundai,Sonata 2.5,2005,10899742,14700000,54079,Diesel,Dealer,Automatic,1
+Haval,Tank 500,2020,27180722,40200000,158301,Hybrid,Dealer,Manual,2
+Honda,City 1.5 Aspire,2022,35348772,42300000,10910,Hybrid,Individual,Automatic,1
+Suzuki,Cultus VXL,2010,859181,1100000,179503,Diesel,Dealer,Manual,0
+BYD,Seal,2005,30815632,41900000,51886,Petrol,Dealer,Automatic,2
+Toyota,Fortuner G,2010,16237083,29800000,50768,Petrol,Dealer,Manual,2
+Changan,Oshan X7 FutureSense,2014,18001881,32300000,177676,Diesel,Individual,Manual,1
+BYD,Seal,2010,2750357,4500000,9267,Hybrid,Dealer,Manual,1
+Suzuki,Carry,2015,31917413,46200000,171849,Electric,Individual,Manual,2
+Honda,City 1.2 LS,2012,9719445,11800000,151537,Petrol,Dealer,Manual,1
+Toyota,Corolla Grande,2013,15793818,19600000,109423,Electric,Dealer,Manual,1
+Hyundai,Elantra 2.0,2016,41943155,47800000,139316,Hybrid,Dealer,Manual,2
+Toyota,Fortuner Legender,2024,21584115,31100000,36828,Hybrid,Dealer,Manual,0
+MG,HS PHEV,2014,27080710,33400000,164267,Electric,Individual,Manual,0
+Audi,e-tron,2016,9091816,15900000,163678,Hybrid,Dealer,Automatic,0
+Chery,Tiggo 7 PHEV,2007,35955816,40800000,125178,Electric,Individual,Automatic,2
+Toyota,Fortuner V,2010,12625892,22300000,26579,Hybrid,Dealer,Manual,0
+DFSK,Glory 500,2007,34549655,44900000,4927,Hybrid,Dealer,Manual,2
+DFSK,Glory 580,2005,34298351,40200000,137606,Diesel,Dealer,Manual,1
+Kia,Sportage Alpha,2018,23318637,39100000,7532,Hybrid,Dealer,Automatic,0
+Haval,Tank 500,2006,8501723,12100000,130797,Hybrid,Dealer,Automatic,2
+Suzuki,Alto VXL,2019,28019901,46900000,92917,Petrol,Individual,Automatic,1
+Suzuki,Cultus VXR,2022,13943353,22100000,50896,Electric,Individual,Automatic,2
+Suzuki,Alto VXL,2024,13534343,20200000,115748,Hybrid,Dealer,Manual,1
+Hyundai,Tucson GLS,2014,714096,1100000,188851,Electric,Dealer,Automatic,0
+Toyota,Fortuner G,2009,31211921,43200000,195712,Hybrid,Individual,Automatic,1
+Toyota,Fortuner G,2024,8919877,11500000,24965,Petrol,Dealer,Manual,1
+Toyota,Hilux Revo V,2014,13355317,20000000,18630,Electric,Individual,Automatic,1
+Suzuki,Cultus VXL,2012,35439118,43100000,75304,Electric,Individual,Automatic,1
+Toyota,Prado,2010,2582762,5100000,88641,Hybrid,Individual,Manual,1
+Toyota,Hilux Revo G,2024,39012616,47800000,125941,Petrol,Individual,Manual,1
+Toyota,Corolla XLi,2021,23796645,28300000,198723,Petrol,Dealer,Manual,0
+Haval,H6 HEV,2018,14207910,22400000,146687,Hybrid,Dealer,Automatic,1
+Toyota,Prado,2011,31116218,43200000,25338,Hybrid,Individual,Manual,1
+Toyota,Fortuner G,2021,16231592,23000000,66195,Diesel,Dealer,Manual,2
+Kia,Sorento AWD,2015,7892700,13100000,168767,Hybrid,Individual,Manual,1
+Suzuki,Cultus VXR,2009,30257182,42900000,59759,Diesel,Dealer,Automatic,2
+Toyota,Corolla Altis,2016,14074328,23400000,166537,Petrol,Individual,Automatic,2
+BYD,Atto 2,2007,18234954,22000000,173105,Hybrid,Dealer,Automatic,2
+Honda,City 1.5 Aspire,2007,24507002,45800000,18637,Petrol,Individual,Automatic,2
+Toyota,Corolla GLi,2024,19493409,28400000,183502,Petrol,Dealer,Manual,1
+Toyota,Corolla Cross,2013,26444421,37600000,51585,Hybrid,Dealer,Automatic,0
+Hyundai,Palisade,2015,18616764,27900000,120173,Hybrid,Dealer,Manual,2
+Suzuki,Swift GLX CVT,2014,33696311,45500000,195983,Petrol,Dealer,Automatic,0
+Suzuki,Alto VXR,2013,26781525,45300000,104987,Petrol,Individual,Manual,1
+Mercedes,E-Class,2007,36536145,41500000,137286,Petrol,Individual,Automatic,2
+Toyota,Corolla GLi,2015,31384235,38100000,129869,Hybrid,Dealer,Automatic,2
+Hyundai,Tucson GLS,2006,16520259,20100000,32967,Diesel,Dealer,Automatic,1
+MG,MG 4,2023,29751133,49000000,7674,Petrol,Individual,Manual,0
+Audi,A3,2014,2341456,4300000,105297,Hybrid,Dealer,Manual,0
+Changan,Lumin,2006,3624410,4600000,183648,Diesel,Individual,Automatic,2
+MG,MG 4,2021,8835852,13400000,158133,Petrol,Dealer,Automatic,1
+Suzuki,Alto VXR,2020,41289070,47100000,146652,Electric,Dealer,Automatic,0
+Mercedes,C-Class,2024,22994390,28800000,114191,Electric,Dealer,Automatic,0
+Suzuki,Alto VX,2012,12823184,20800000,197916,Hybrid,Dealer,Automatic,1
+Suzuki,Wagon R VXR,2020,19208655,22400000,80182,Diesel,Individual,Automatic,2
+Kia,Stonic EX+,2019,26646765,38400000,83685,Diesel,Dealer,Manual,0
+BYD,Sealion 6,2013,32993205,40400000,123880,Electric,Dealer,Manual,2
+Toyota,Yaris ATIV,2020,14181308,19900000,36678,Hybrid,Individual,Automatic,1
+Hyundai,Elantra 2.0,2020,31985915,38300000,2232,Petrol,Individual,Automatic,2
+Honda,BR-V CVT-S,2023,1815324,3000000,103446,Petrol,Dealer,Manual,0
+Proton,Saga,2013,31831247,46500000,186479,Diesel,Individual,Manual,2
+Hyundai,Elantra 2.0,2024,18593133,32500000,153843,Petrol,Individual,Manual,2
+Kia,Sorento AWD,2012,19894213,26500000,107247,Petrol,Dealer,Manual,1
+Honda,HR-V VTi,2022,28771703,46300000,81381,Electric,Dealer,Manual,2
+Hyundai,Tucson GLS,2019,7327542,10400000,27581,Hybrid,Individual,Manual,0
+Hyundai,Tucson Ultimate,2016,15588908,20900000,117824,Electric,Individual,Automatic,1
+MG,ZS EV,2022,9379773,13800000,192284,Petrol,Dealer,Automatic,0
+Toyota,Yaris GLi,2022,20047422,28600000,121902,Diesel,Dealer,Manual,1
+BMW,5 Series,2020,19293829,36800000,51687,Electric,Dealer,Automatic,1
+MG,HS PHEV,2014,23194430,37900000,122538,Electric,Individual,Manual,0
+Suzuki,Swift GL,2021,18244208,21400000,133224,Petrol,Individual,Manual,2
+Toyota,Prado,2017,7616011,13900000,94453,Hybrid,Dealer,Automatic,0
+Honda,HR-V e:HEV,2023,12563573,18400000,54681,Petrol,Individual,Automatic,1
+MG,HS Essence,2005,22502916,31000000,64931,Electric,Dealer,Manual,1
+Toyota,Fortuner V,2009,2413457,2800000,52625,Petrol,Individual,Automatic,2
+Haval,Tank 500,2023,35834448,43900000,56410,Diesel,Individual,Manual,2
+Audi,e-tron,2020,17796923,21800000,155518,Electric,Individual,Manual,2
+Suzuki,Alto VXL,2005,6983785,13900000,47932,Electric,Individual,Automatic,2
+Suzuki,Alto VXR,2008,10795880,17500000,147420,Hybrid,Dealer,Automatic,2
+MG,MG 4,2022,24920120,27700000,23819,Hybrid,Dealer,Automatic,1
+Suzuki,Alto VXL,2017,5488526,7900000,168521,Petrol,Dealer,Manual,1
+Proton,Saga,2015,4986596,6800000,31015,Petrol,Dealer,Automatic,2
+Toyota,Prado,2006,5193367,8700000,44121,Petrol,Individual,Automatic,0
+Haval,Tank 500,2014,19056713,22600000,183835,Petrol,Dealer,Manual,2
+BMW,iX,2023,20124353,32600000,45699,Electric,Dealer,Manual,0
+Proton,X70,2021,26055229,34700000,79108,Electric,Dealer,Manual,0
+Hyundai,Tucson Ultimate,2007,6763518,8000000,79730,Electric,Individual,Manual,0
+Suzuki,Swift GLX CVT,2009,24381161,45800000,72025,Diesel,Individual,Automatic,1
+Kia,Sportage AWD,2012,8913519,11300000,164960,Diesel,Individual,Manual,2
+Toyota,Corolla GLi,2018,19448925,21700000,112761,Petrol,Individual,Manual,0
