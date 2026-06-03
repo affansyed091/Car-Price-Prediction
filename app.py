@@ -34,7 +34,7 @@ app_mode = st.sidebar.selectbox(
 # ---------------- Load Data ----------------
 @st.cache_data
 def load_data():
-    df = pd.read_csv("CAR_DATA_PAKISTAN.csv")
+    df = pd.read_csv("CAR DATA1.csv")
     df.columns = df.columns.str.strip()
     return df
 
